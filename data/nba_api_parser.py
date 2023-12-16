@@ -4,7 +4,7 @@ import time as t
 from utils import convert_time
 
 # Global constant for the NBA scoreboard URL
-NBA_SCOREBOARD_URL = "http://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard"
+NBA_SCOREBOARD_URL = "http://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/scoreboard"
 
 def get_moneyline_odds(game_id):
     """
