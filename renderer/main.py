@@ -44,15 +44,26 @@ class MainRenderer:
             home_logo_position: A tuple (x, y) for the position of the home team logo.
         """
         self.canvas.SetImage(self.image, 0, 0)
-        if self.data.nba_logos:
-            away_team_logo = Image.open('logos/{}H.png'.format(game['awayteam'])).resize((20, 20), Image.ANTIALIAS)
-            home_team_logo = Image.open('logos/{}H.png'.format(game['hometeam'])).resize((20, 20), Image.ANTIALIAS)
-        else:
-            away_team_logo = Image.open('logos/{}.png'.format(game['awayteam'])).resize((20, 20), Image.BOX)
-            home_team_logo = Image.open('logos/{}.png'.format(game['hometeam'])).resize((20, 20), Image.BOX)
+        try:
+            if self.data.nba_logos:
+                away_team_logo = Image.open('logos/{}H.png'.format(game['awayteam'])).resize((20, 20), Image.ANTIALIAS)
+                home_team_logo = Image.open('logos/{}H.png'.format(game['hometeam'])).resize((20, 20), Image.ANTIALIAS)
+            else:
+                away_team_logo = Image.open('logos/{}.png'.format(game['awayteam'])).resize((20, 20), Image.BOX)
+                home_team_logo = Image.open('logos/{}.png'.format(game['hometeam'])).resize((20, 20), Image.BOX)
 
-        self.canvas.SetImage(away_team_logo.convert("RGB"), *away_logo_position)
-        self.canvas.SetImage(home_team_logo.convert("RGB"), *home_logo_position)
+                self.canvas.SetImage(away_team_logo.convert("RGB"), *away_logo_position)
+                self.canvas.SetImage(home_team_logo.convert("RGB"), *home_logo_position)
+        except FileNotFoundError:
+            print("Logo file not found. Using default logo.")
+            away_team_logo = Image.open('logos/ball.png').resize((20, 20), Image.ANTIALIAS)
+            home_team_logo = Image.open('logos/ball.png').resize((20, 20), Image.BOX)
+
+            self.canvas.SetImage(away_team_logo.convert("RGB"), *away_logo_position)
+            self.canvas.SetImage(home_team_logo.convert("RGB"), *home_logo_position)
+        finally:
+            away_team_logo.close()
+            home_team_logo.close()
 
     def render(self):
         try:

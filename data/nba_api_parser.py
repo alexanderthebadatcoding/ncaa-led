@@ -16,7 +16,7 @@ def get_moneyline_odds(game_id):
     Returns:
         tuple: Moneyline odds for away and home teams, or ("N/A", "N/A") if not found.
     """
-    odds_url = f"http://sports.core.api.espn.com/v2/sports/basketball/leagues/nba/events/{game_id}/competitions/{game_id}/odds"
+    odds_url = f"http://sports.core.api.espn.com/v2/sports/basketball/leagues/mens-college-basketball/events/{game_id}/competitions/{game_id}/odds"
     response = requests.get(odds_url)
 
     if response.status_code == 200:
