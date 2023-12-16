@@ -3,12 +3,12 @@ import datetime
 import time as t
 from utils import convert_time
 
-# Global constant for the NBA scoreboard URL
-NBA_SCOREBOARD_URL = "http://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/scoreboard"
+# Global constant for the ncaa scoreboard URL
+ncaa_SCOREBOARD_URL = "http://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/scoreboard"
 
 def get_moneyline_odds(game_id):
     """
-    Fetches the moneyline odds for a given NBA game.
+    Fetches the moneyline odds for a given ncaa game.
 
     Args:
         game_id (str): The unique identifier for the game.
@@ -46,13 +46,13 @@ def get_moneyline_odds(game_id):
 
 def get_all_games():
     """
-    Fetches all current NBA games with their basic details and moneyline odds.
+    Fetches all current ncaa games with their basic details and moneyline odds.
 
     Returns:
         list: List of dictionaries, each containing game details and odds.
     """
     try:
-        response = requests.get(NBA_SCOREBOARD_URL)
+        response = requests.get(ncaa_SCOREBOARD_URL)
         games_data = response.json().get('events', [])
 
         games = []

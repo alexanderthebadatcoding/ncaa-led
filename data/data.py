@@ -1,6 +1,6 @@
 from datetime import datetime, timedelta
 import time as t
-import data.nba_api_parser as nbaparser
+import data.ncaa_api_parser as ncaaparser
 import debug
 
 NETWORK_RETRY_SLEEP_TIME = 10.0
@@ -13,7 +13,7 @@ class Data:
         # Flag to determine when to refresh data
         self.needs_refresh = True
 
-        self.nba_logos = self.config.nba_logos
+        self.ncaa_logos = self.config.ncaa_logos
         
         # Parse today's date and see if we should use today or yesterday
         self.get_current_date()
@@ -36,7 +36,7 @@ class Data:
         attempts_remaining = 5
         while attempts_remaining > 0:
             try:
-                all_games = nbaparser.get_all_games()
+                all_games = ncaaparser.get_all_games()
                 if self.config.rotation_only_preferred:
                     self.games = self.__filter_list_of_games(all_games, self.config.preferred_teams)
                 # if rotation is disabled, only look at the first team in the list of preferred teams

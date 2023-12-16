@@ -31,9 +31,9 @@ class MainRenderer:
         self.image = Image.new('RGB', (self.width, self.height))
         self.draw = ImageDraw.Draw(self.image)
 
-    def display_nba_logo(self):
-        nba_logo = Image.open('logos/NBA.png').resize((22, 22), Image.ANTIALIAS)
-        self.canvas.SetImage(nba_logo.convert("RGB"), 22, 1)
+    def display_ncaa_logo(self):
+        ncaa_logo = Image.open('logos/NCAA.png').resize((22, 22), Image.ANTIALIAS)
+        self.canvas.SetImage(ncaa_logo.convert("RGB"), 22, 1)
 
     def display_team_logos(self, game, away_logo_position, home_logo_position):
         """
@@ -45,7 +45,7 @@ class MainRenderer:
         """
         self.canvas.SetImage(self.image, 0, 0)
         try:
-            if self.data.nba_logos:
+            if self.data.ncaa_logos:
                 away_team_logo = Image.open('logos/{}H.png'.format(game['awayteam'])).resize((20, 20), Image.ANTIALIAS)
                 home_team_logo = Image.open('logos/{}H.png'.format(game['hometeam'])).resize((20, 20), Image.ANTIALIAS)
             else:
@@ -153,7 +153,7 @@ class MainRenderer:
         loading_pos = center_text(self.font_mini.getsize('Loading')[0], 32)
         self.draw.multiline_text((loading_pos, 24), 'Loading...', font=self.font_mini, align="center")
         self.canvas.SetImage(self.image, 0, 0)
-        self.display_nba_logo()
+        self.display_ncaa_logo()
         self.refresh_display()
         if self.data is not None:
             pass
@@ -171,7 +171,7 @@ class MainRenderer:
     def error_screen(self):
         self.draw.multiline_text((24, 24), 'Error', fill=(255, 55, 25), font=self.font_mini, align="center")
         self.canvas.SetImage(self.image, 0, 0)
-        self.display_nba_logo()
+        self.display_ncaa_logo()
         self.refresh_display()
         t.sleep(30)
         if self.data is not None:

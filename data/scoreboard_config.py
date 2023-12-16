@@ -23,8 +23,8 @@ class ScoreboardConfig:
         self.rotation_preferred_team_live_halftime = json["rotation"]["while_preferred_team_live"]["during_halftime"]
         self.scrolling_speed = json["scrolling_speed"]
 
-        # use nba logos or regular team logos
-        self.nba_logos = json["use_nba_logos"]
+        # use ncaa logos or regular team logos
+        self.ncaa_logos = json["use_ncaa_logos"]
 
         # Debug
         self.debug = json["debug"]
