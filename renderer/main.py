@@ -44,6 +44,9 @@ class MainRenderer:
             home_logo_position: A tuple (x, y) for the position of the home team logo.
         """
         self.canvas.SetImage(self.image, 0, 0)
+        away_team_logo = None
+        home_team_logo = None
+        
         try:
             if self.data.ncaa_logos:
                 away_team_logo = Image.open('logos/{}H.png'.format(game['awayteam'])).resize((20, 20), Image.ANTIALIAS)
@@ -62,8 +65,10 @@ class MainRenderer:
             self.canvas.SetImage(away_team_logo.convert("RGB"), *away_logo_position)
             self.canvas.SetImage(home_team_logo.convert("RGB"), *home_logo_position)
         finally:
-            away_team_logo.close()
-            home_team_logo.close()
+            if away_team_logo:
+                away_team_logo.close()
+            if home_team_logo:
+                home_team_logo.close()
 
     def render(self):
         try:
